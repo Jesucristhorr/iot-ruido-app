@@ -10,6 +10,8 @@ import { DefaultLayout } from '~/components/DefaultLayout';
 import { AppRouter } from '~/server/routers/_app';
 import { SSRContext } from '~/utils/trpc';
 
+import { MantineProvider } from '@mantine/core';
+
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
@@ -20,7 +22,12 @@ type AppPropsWithLayout = AppProps & {
 
 const MyApp = (({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout =
-    Component.getLayout ?? ((page) => <DefaultLayout>{page}</DefaultLayout>);
+    Component.getLayout ??
+    ((page) => (
+      <MantineProvider>
+        <DefaultLayout>{page}</DefaultLayout>
+      </MantineProvider>
+    ));
 
   return getLayout(<Component {...pageProps} />);
 }) as AppType;
