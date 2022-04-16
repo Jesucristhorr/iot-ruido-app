@@ -73,5 +73,6 @@
   },
   "publishConfig": {
     "access": "restricted"
-  }
+  },
+  "license": "MIT"
 }
