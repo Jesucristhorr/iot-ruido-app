@@ -9,8 +9,12 @@ import superjson from 'superjson';
 import { DefaultLayout } from '~/components/DefaultLayout';
 import { AppRouter } from '~/server/routers/_app';
 import { SSRContext } from '~/utils/trpc';
-
-import { MantineProvider } from '@mantine/core';
+import {
+  MantineProvider,
+  ColorSchemeProvider,
+  ColorScheme,
+} from '@mantine/core';
+import { useLocalStorage } from '@mantine/hooks';
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -20,16 +24,36 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-const MyApp = (({ Component, pageProps }: AppPropsWithLayout) => {
+const MyApp = ((props: AppPropsWithLayout & { colorScheme: ColorScheme }) => {
+  const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
+    key: 'color-scheme',
+    defaultValue: 'light',
+    getInitialValueInEffect: true,
+  });
+
+  const toggleColorScheme = () =>
+    setColorScheme((current) => (current === 'dark' ? 'light' : 'dark'));
+
   const getLayout =
-    Component.getLayout ??
+    props.Component.getLayout ??
     ((page) => (
-      <MantineProvider>
-        <DefaultLayout>{page}</DefaultLayout>
-      </MantineProvider>
+      <ColorSchemeProvider
+        colorScheme={colorScheme}
+        toggleColorScheme={toggleColorScheme}
+      >
+        <MantineProvider
+          theme={{
+            colorScheme,
+          }}
+          withNormalizeCSS
+          withGlobalStyles
+        >
+          <DefaultLayout>{page}</DefaultLayout>
+        </MantineProvider>
+      </ColorSchemeProvider>
     ));
 
-  return getLayout(<Component {...pageProps} />);
+  return getLayout(<props.Component {...props.pageProps} />);
 }) as AppType;
 
 function getBaseUrl() {
