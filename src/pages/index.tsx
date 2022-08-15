@@ -1,90 +1,90 @@
-import { trpc } from '../utils/trpc';
+import { useState, useMemo, useCallback, CSSProperties } from 'react';
+
 import { NextPageWithLayout } from './_app';
-import Link from 'next/link';
+import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
+
+import { useLocalStorageValue } from '@mantine/hooks';
+
+type Map = google.maps.Map;
+type MapOptions = google.maps.MapOptions;
+type LatLngLiteral = google.maps.LatLngLiteral;
 
 const IndexPage: NextPageWithLayout = () => {
-  const utils = trpc.useContext();
-  const postsQuery = trpc.useQuery(['post.all']);
-  const addPost = trpc.useMutation('post.add', {
-    async onSuccess() {
-      // refetches posts after a post is added
-      await utils.invalidateQueries(['post.all']);
-    },
+  const [value] = useLocalStorageValue({
+    key: 'color-scheme',
+    getInitialValueInEffect: true,
+  });
+  const { isLoaded, loadError } = useJsApiLoader({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? '',
+    id: 'google-map-script',
+    version: 'weekly',
+    language: 'es',
   });
 
-  // prefetch all posts for instant navigation
-  // useEffect(() => {
-  //   for (const { id } of postsQuery.data ?? []) {
-  //     utils.prefetchQuery(['post.byId', { id }]);
-  //   }
-  // }, [postsQuery.data, utils]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [map, setMap] = useState<Map | null>(null);
+  const pos = useMemo<LatLngLiteral>(
+    () => ({
+      lat: -0.95434,
+      lng: -80.71094,
+    }),
+    [],
+  );
+  const zoom = useMemo<number>(() => 19, []);
+  const styles = useMemo<CSSProperties>(
+    () => ({ width: '100%', height: '100vh' }),
+    [],
+  );
+  const options = useMemo<MapOptions>(
+    () => ({
+      mapId: value === 'dark' ? '9c798d152b70da7e' : '37908b8607394fd6',
+      fullscreenControl: false,
+      streetViewControl: false,
+      mapTypeControl: false,
+      clickableIcons: false,
+    }),
+    [value],
+  );
+  const center = useMemo<LatLngLiteral>(
+    () => ({
+      lat: -0.953583,
+      lng: -80.745317,
+    }),
+    [],
+  );
+
+  const onMapLoad = useCallback((map: Map) => {
+    setMap(map);
+  }, []);
+
+  const onMapUnmount = useCallback(() => {
+    setMap(null);
+  }, []);
 
   return (
     <>
-      <h1>Welcome to your tRPC starter!</h1>
-      <p>
-        Check <a href="https://trpc.io/docs">the docs</a> whenever you get
-        stuck, or ping <a href="https://twitter.com/alexdotjs">@alexdotjs</a> on
-        Twitter.
-      </p>
-
-      <h2>
-        Posts
-        {postsQuery.status === 'loading' && '(loading)'}
-      </h2>
-      {postsQuery.data?.map((item) => (
-        <article key={item.id}>
-          <h3>{item.title}</h3>
-          <Link href={`/post/${item.id}`}>
-            <a>View more</a>
-          </Link>
-        </article>
-      ))}
-
-      <hr />
-
-      <form
-        onSubmit={async (e) => {
-          e.preventDefault();
-          /**
-           * In a real app you probably don't want to use this manually
-           * Checkout React Hook Form - it works great with tRPC
-           * @link https://react-hook-form.com/
-           */
-
-          const $text: HTMLInputElement = (e as any).target.elements.text;
-          const $title: HTMLInputElement = (e as any).target.elements.title;
-          const input = {
-            title: $title.value,
-            text: $text.value,
-          };
-          try {
-            await addPost.mutateAsync(input);
-
-            $title.value = '';
-            $text.value = '';
-          } catch {}
-        }}
-      >
-        <label htmlFor="title">Title:</label>
-        <br />
-        <input
-          id="title"
-          name="title"
-          type="text"
-          disabled={addPost.isLoading}
-        />
-
-        <br />
-        <label htmlFor="text">Text:</label>
-        <br />
-        <textarea id="text" name="text" disabled={addPost.isLoading} />
-        <br />
-        <input type="submit" disabled={addPost.isLoading} />
-        {addPost.error && (
-          <p style={{ color: 'red' }}>{addPost.error.message}</p>
-        )}
-      </form>
+      {isLoaded && (
+        <GoogleMap
+          mapContainerStyle={styles}
+          center={center}
+          zoom={zoom}
+          options={options}
+          onLoad={onMapLoad}
+          onUnmount={onMapUnmount}
+        >
+          <Marker
+            position={pos}
+            icon={{
+              path: 'M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z',
+              fillColor: '#00CCBB',
+              fillOpacity: 1,
+              strokeColor: '',
+              strokeWeight: 0,
+            }}
+          />
+        </GoogleMap>
+      )}
+      {loadError && <h1>Error</h1>}
     </>
   );
 };
