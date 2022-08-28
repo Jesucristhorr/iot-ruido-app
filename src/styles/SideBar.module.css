@@ -1,0 +1,38 @@
+.user-container {
+  /* background-color: rgb(107, 162, 194); */
+  margin: 0;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-bottom: 1px solid #17a9bf;
+  margin-bottom: 10px;
+}
+
+.user-container-info {
+  margin-left: 10px;
+}
+.user-container-info p {
+  font-size: 14px;
+}
+.nav-container {
+  /* margin-top: 24px; */
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.nav-container:hover {
+  background-color: #e2fafb;
+}
+.nav-container div {
+  /* padding: 5px; */
+  margin-left: 8px;
+}
+.nav-container div a {
+  text-decoration: none;
+  font-size: 15px;
+}
+@media (max-width: 640px) {
+  .user-avatar {
+    width: 60px;
+  }
+}
