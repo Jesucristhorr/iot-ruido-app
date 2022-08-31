@@ -14,7 +14,8 @@ export const Footer = () => {
           y{' '}
           <a href="#" className={styles['footer-a']}>
             Jesús
-          </a>
+          </a>{' '}
+          con mucho &#x2665;
         </p>
         <div>
           <BrandGithub />

@@ -1,7 +1,13 @@
 import { Navbar, Avatar } from '@mantine/core';
 import React from 'react';
 import styles from '../styles/SideBar.module.css';
-import { InfoCircle } from 'tabler-icons-react';
+import {
+  InfoCircle,
+  Speakerphone,
+  Artboard,
+  Settings,
+  User,
+} from 'tabler-icons-react';
 
 interface SideBarProps {
   opened: boolean;
@@ -12,23 +18,29 @@ export const SideBar: React.FC<SideBarProps> = ({ opened }) => {
     <Navbar
       p="md"
       hiddenBreakpoint="sm"
-      width={{ sm: 200, lg: 200 }}
+      width={{ sm: 200, lg: 250 }}
       hidden={!opened}
       classNames={{ root: styles.prueba }}
     >
-      {/* Navbar content */}
+      {/* Esta logueado*/}
       <div className={styles['user-container']}>
-        <Avatar
-          component="a"
-          href="#"
-          target="_blank"
-          src=""
-          alt="it's me"
-          color="cyan"
-          radius="xl"
-        />
-        <div className={styles['user-container-info']}>
-          <p>Jennifer Intriago</p>
+        <div className={styles['user-item']}>
+          <Avatar
+            component="a"
+            href="#"
+            target="_blank"
+            src=""
+            alt="it's me"
+            color="cyan"
+            radius="xl"
+          />
+          <div className={styles['user-container-info']}>
+            <p>Jennifer Intriago</p>
+          </div>
+        </div>
+        <div className={styles['user-login']}>
+          <p>e1313817817@live.uleam.edu.ec</p>
+          <a href="#">Cerrar Sesión</a>
         </div>
       </div>
 
@@ -45,7 +57,7 @@ export const SideBar: React.FC<SideBarProps> = ({ opened }) => {
 
       <div className={styles['nav-container']}>
         <div>
-          <InfoCircle size={30} strokeWidth={2} color={'#17a9bf'} />
+          <Speakerphone size={30} strokeWidth={2} color={'#17a9bf'} />
         </div>
         <div>
           <p>
@@ -55,11 +67,31 @@ export const SideBar: React.FC<SideBarProps> = ({ opened }) => {
       </div>
       <div className={styles['nav-container']}>
         <div>
-          <InfoCircle size={30} strokeWidth={2} color={'#17a9bf'} />
+          <Artboard size={30} strokeWidth={2} color={'#17a9bf'} />
         </div>
         <div>
           <p>
-            <a href="#">Login</a>
+            <a href="#">Agregar Sensor</a>
+          </p>
+        </div>
+      </div>
+      <div className={styles['nav-container']}>
+        <div>
+          <Settings size={30} strokeWidth={2} color={'#17a9bf'} />
+        </div>
+        <div>
+          <p>
+            <a href="#">Administrar Sensores</a>
+          </p>
+        </div>
+      </div>
+      <div className={styles['nav-container']}>
+        <div>
+          <User size={30} strokeWidth={2} color={'#17a9bf'} />
+        </div>
+        <div>
+          <p>
+            <a href="#">Administrar Usuarios</a>
           </p>
         </div>
       </div>
