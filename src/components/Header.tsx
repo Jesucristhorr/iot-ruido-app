@@ -8,6 +8,7 @@ import {
 import { Title, Group, ActionIcon, Tooltip } from '@mantine/core';
 import { Sun, MoonStars } from 'tabler-icons-react';
 import styles from '../styles/Header.module.css';
+import Link from 'next/link';
 
 interface HeaderProps {
   opened: boolean;
@@ -34,11 +35,13 @@ export const Header: React.FC<HeaderProps> = ({
           />
         </MediaQuery>
         <Group position="apart">
-          <img
-            className={styles['logo-uleam']}
-            src="https://ik.imagekit.io/hpmztn0eqra/LOGO-ULEAM-HORIZONTAL__2__FhP2OS__w.png?ik-sdk-version=javascript-1.4.3&updatedAt=1609347141336"
-            alt=""
-          />
+          <Link href="/">
+            <img
+              className={styles['logo-uleam']}
+              src="https://ik.imagekit.io/hpmztn0eqra/LOGO-ULEAM-HORIZONTAL__2__FhP2OS__w.png?ik-sdk-version=javascript-1.4.3&updatedAt=1609347141336"
+              alt=""
+            />
+          </Link>
           <div>
             <Title order={2} className={styles['title']}>
               Facultad de Ciencias Informáticas

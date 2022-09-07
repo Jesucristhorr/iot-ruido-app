@@ -1,6 +1,7 @@
 import { Navbar, Avatar } from '@mantine/core';
 import React from 'react';
 import styles from '../styles/SideBar.module.css';
+import Link from 'next/link';
 import {
   InfoCircle,
   Speakerphone,
@@ -49,9 +50,9 @@ export const SideBar: React.FC<SideBarProps> = ({ opened }) => {
           <InfoCircle size={30} strokeWidth={2} color={'#17a9bf'} />
         </div>
         <div>
-          <p>
-            <a href="#">Información</a>
-          </p>
+          <Link href="/informacion">
+            <p>Información</p>
+          </Link>
         </div>
       </div>
 
@@ -60,9 +61,9 @@ export const SideBar: React.FC<SideBarProps> = ({ opened }) => {
           <Speakerphone size={30} strokeWidth={2} color={'#17a9bf'} />
         </div>
         <div>
-          <p>
-            <a href="#">Niveles de Ruido</a>
-          </p>
+          <Link href="/ruido">
+            <p>Niveles de Ruido</p>
+          </Link>
         </div>
       </div>
       <div className={styles['nav-container']}>
@@ -70,9 +71,9 @@ export const SideBar: React.FC<SideBarProps> = ({ opened }) => {
           <Artboard size={30} strokeWidth={2} color={'#17a9bf'} />
         </div>
         <div>
-          <p>
-            <a href="#">Agregar Sensor</a>
-          </p>
+          <Link href="/">
+            <p>Agregar Sensor</p>
+          </Link>
         </div>
       </div>
       <div className={styles['nav-container']}>
@@ -80,9 +81,9 @@ export const SideBar: React.FC<SideBarProps> = ({ opened }) => {
           <Settings size={30} strokeWidth={2} color={'#17a9bf'} />
         </div>
         <div>
-          <p>
-            <a href="#">Administrar Sensores</a>
-          </p>
+          <Link href="/">
+            <p>Administrar Sensores</p>
+          </Link>
         </div>
       </div>
       <div className={styles['nav-container']}>
@@ -90,9 +91,9 @@ export const SideBar: React.FC<SideBarProps> = ({ opened }) => {
           <User size={30} strokeWidth={2} color={'#17a9bf'} />
         </div>
         <div>
-          <p>
-            <a href="#">Administrar Usuarios</a>
-          </p>
+          <Link href="/">
+            <p>Administrar Usuarios</p>
+          </Link>
         </div>
       </div>
     </Navbar>
