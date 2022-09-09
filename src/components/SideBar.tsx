@@ -9,12 +9,16 @@ import {
   Settings,
   User,
 } from 'tabler-icons-react';
+// import { Modal } from './Modal';
+import { useState } from 'react';
 
+import { Modal } from '@mantine/core';
 interface SideBarProps {
   opened: boolean;
 }
 
 export const SideBar: React.FC<SideBarProps> = ({ opened }) => {
+  const [openModal, setOpenModal] = useState(false);
   return (
     <Navbar
       p="md"
@@ -70,11 +74,22 @@ export const SideBar: React.FC<SideBarProps> = ({ opened }) => {
         <div>
           <Artboard size={30} strokeWidth={2} color={'#17a9bf'} />
         </div>
-        <div>
-          <Link href="/">
-            <p>Agregar Sensor</p>
-          </Link>
+        <div
+          onClick={() => {
+            console.log('Me dieron clic, deberia abrir el modal');
+            setOpenModal(true);
+            // <Modal openModal={true} setOpenModal={setOpenModal} />;
+          }}
+        >
+          <p>Agregar Sensor</p>
         </div>
+        <Modal
+          opened={openModal}
+          onClose={() => setOpenModal(false)}
+          title="Introduce yourself!"
+        >
+          {/* Modal content */}
+        </Modal>
       </div>
       <div className={styles['nav-container']}>
         <div>
