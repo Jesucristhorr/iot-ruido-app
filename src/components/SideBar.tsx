@@ -12,7 +12,7 @@ import {
 // import { Modal } from './Modal';
 import { useState } from 'react';
 
-import { Modal } from '@mantine/core';
+import { Modal, TextInput, Button } from '@mantine/core';
 interface SideBarProps {
   opened: boolean;
 }
@@ -86,8 +86,41 @@ export const SideBar: React.FC<SideBarProps> = ({ opened }) => {
         <Modal
           opened={openModal}
           onClose={() => setOpenModal(false)}
-          title="Introduce yourself!"
+          title="Ingresar nuevo Sensor"
+          size="70%"
         >
+          {/* Modal content */}
+          <TextInput
+            className={styles['text-item']}
+            label="SN"
+            placeholder="SN"
+          />
+          <TextInput
+            className={styles['text-item']}
+            label="Nombre"
+            placeholder="Nombre"
+          />
+          <TextInput
+            className={styles['text-item']}
+            label="Descripción"
+            placeholder="Descripción"
+          />
+          <TextInput
+            className={styles['text-item']}
+            label="Unidad de Medida"
+            placeholder="Unidad de Medida"
+          />
+          <TextInput
+            className={styles['text-item']}
+            label="Latitud"
+            placeholder="Latitud"
+          />
+          <TextInput
+            className={styles['text-item']}
+            label="Longitud"
+            placeholder="Longitud"
+          />
+          <Button color="cyan">Guardar</Button>
           {/* Modal content */}
         </Modal>
       </div>
