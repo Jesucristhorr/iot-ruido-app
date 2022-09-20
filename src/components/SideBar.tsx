@@ -120,7 +120,9 @@ export const SideBar: React.FC<SideBarProps> = ({ opened }) => {
             label="Longitud"
             placeholder="Longitud"
           />
-          <Button color="cyan">Guardar</Button>
+          <Button color="cyan" style={{ marginTop: '20px' }}>
+            Guardar
+          </Button>
           {/* Modal content */}
         </Modal>
       </div>
@@ -129,7 +131,7 @@ export const SideBar: React.FC<SideBarProps> = ({ opened }) => {
           <Settings size={30} strokeWidth={2} color={'#17a9bf'} />
         </div>
         <div>
-          <Link href="/">
+          <Link href="/administrarsensor">
             <p>Administrar Sensores</p>
           </Link>
         </div>

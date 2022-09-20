@@ -1,0 +1,23 @@
+.actions-icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.table-container {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+.table-container Table {
+  width: 90%;
+}
+
+@media (max-width: 640px) {
+  .table-container {
+    padding: 0rem;
+    margin: 0px;
+  }
+  .table-container Table {
+    width: 80%;
+  }
+}

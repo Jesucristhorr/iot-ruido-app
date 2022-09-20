@@ -1,17 +1,13 @@
 .input-text {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-}
-
-.text-item {
-  width: 45%;
-  margin: 24px;
+  align-items: flex-end;
 }
 
 @media (max-width: 640px) {
   .text-item {
     width: 100%;
     margin: 10px;
+    margin-left: 24px;
   }
 }
