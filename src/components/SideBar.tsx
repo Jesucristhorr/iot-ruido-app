@@ -141,7 +141,7 @@ export const SideBar: React.FC<SideBarProps> = ({ opened }) => {
           <User size={30} strokeWidth={2} color={'#17a9bf'} />
         </div>
         <div>
-          <Link href="/">
+          <Link href="/users">
             <p>Administrar Usuarios</p>
           </Link>
         </div>
