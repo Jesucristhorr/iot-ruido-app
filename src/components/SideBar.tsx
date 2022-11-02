@@ -48,7 +48,6 @@ export const SideBar: React.FC<SideBarProps> = ({ opened }) => {
       setSubmitting(false);
     }, 500);
     console.log(values);
-
     resetForm();
     setOpenModal(false);
     setAlerta(true);
@@ -243,7 +242,6 @@ export const SideBar: React.FC<SideBarProps> = ({ opened }) => {
             going back, your data was lost forever!
           </Alert> */}
         </Modal>
-
         {/* alerta */}
       </div>
       <div className={styles['nav-container']}>
