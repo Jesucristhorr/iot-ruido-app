@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Table, Title, Button, Modal, Text } from '@mantine/core';
 
 import sensores from '~/data/sensores';
+
 import { Pencil, TrashX } from 'tabler-icons-react';
 import {
   ErrorMessage,
@@ -16,6 +17,7 @@ import {
   FormikValues,
 } from 'formik';
 interface Values {
+  id: number;
   sn: string;
   nombre: string;
   descripcion: string;
@@ -24,10 +26,24 @@ interface Values {
   longitud: string;
 }
 
+// let nuevoSensor: any[];
+
 export const ManageSensors = () => {
   const [opened, setOpened] = useState(false);
   const [alerta, setAlerta] = useState(false);
   const [deleteSensor, setDeleteSensor] = useState(false);
+
+  const [nuevoSensor, setNuevoSensor] = useState<Values[]>([
+    {
+      id: 1,
+      sn: '',
+      nombre: '',
+      descripcion: '',
+      unidadMedida: '',
+      latitud: '',
+      longitud: '',
+    },
+  ]);
 
   const onFormSubmit = (
     values: Values,
@@ -38,6 +54,9 @@ export const ManageSensors = () => {
       setSubmitting(false);
     }, 500);
     console.log(values);
+    setNuevoSensor([...nuevoSensor, values]);
+    console.log(nuevoSensor);
+
     resetForm();
     setOpened(false);
     setAlerta(true);
@@ -87,6 +106,7 @@ export const ManageSensors = () => {
 
       <Formik
         initialValues={{
+          id: new Date().getTime(),
           sn: '',
           nombre: '',
           descripcion: '',
@@ -203,14 +223,14 @@ export const ManageSensors = () => {
             </tr>
           </thead>
           <tbody>
-            {sensores.map((sensor) => {
+            {nuevoSensor.map((sensor) => {
               return (
                 <tr key={sensor.id}>
                   <td>{sensor.id}</td>
-                  <td>{sensor.sensor}</td>
+                  <td>{sensor.sn}</td>
                   <td>{sensor.nombre}</td>
                   <td>{sensor.descripcion}</td>
-                  <td>{sensor.und}</td>
+                  <td>{sensor.unidadMedida}</td>
                   <td>{sensor.latitud}</td>
                   <td>{sensor.longitud}</td>
                   <td className={styles['actions-icons']}>
