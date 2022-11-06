@@ -4,7 +4,7 @@ import styles from '../styles/SideBar.module.css';
 import { useState } from 'react';
 import { Table, Title, Button, Modal, Text } from '@mantine/core';
 
-import sensores from '~/data/sensores';
+// import sensores from '~/data/sensores';
 
 import { Pencil, TrashX } from 'tabler-icons-react';
 import {

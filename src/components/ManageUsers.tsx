@@ -2,10 +2,11 @@
 import styles from '../styles/SideBar.module.css';
 
 import { useState } from 'react';
-import { Table, Title, Button, Modal, Select } from '@mantine/core';
+import { Table, Title, Button, Modal } from '@mantine/core';
 
-import users from '~/data/users';
+// import users from '~/data/users';
 import { Pencil, TrashX } from 'tabler-icons-react';
+
 import {
   ErrorMessage,
   Field,
@@ -26,6 +27,7 @@ interface Values {
 }
 export const ManageUsers = () => {
   const [opened, setOpened] = useState(false);
+  const [alerta, setAlerta] = useState(false);
 
   const handleModal = () => {
     setOpened(true);
@@ -77,6 +79,7 @@ export const ManageUsers = () => {
     setNuevoUsuario([...nuevoUsuario, values]);
     resetForm();
     setOpened(false);
+    setAlerta(true);
   };
 
   return (
@@ -171,7 +174,12 @@ export const ManageUsers = () => {
 
             <div className={styles['input-form']}>
               <label htmlFor="latitud">Contraseña</label>
-              <Field id="password" name="password" placeholder="Contraseña" />
+              <Field
+                id="password"
+                name="password"
+                placeholder="Contraseña"
+                type="password"
+              />
               <ErrorMessage
                 name="password"
                 component="div"
@@ -185,6 +193,14 @@ export const ManageUsers = () => {
           </Form>
         </Modal>
       </Formik>
+
+      <Modal
+        withCloseButton={false}
+        opened={alerta}
+        onClose={() => setAlerta(false)}
+      >
+        Usuario agregado correctamente!!
+      </Modal>
 
       <div className={styles['table-container-users']}>
         <Table striped>
