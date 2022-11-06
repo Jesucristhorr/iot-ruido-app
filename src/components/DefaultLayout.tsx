@@ -1,22 +1,20 @@
 import Head from 'next/head';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import { ReactQueryDevtools } from 'react-query/devtools';
+// import { Footer } from '@mantine/core';
 
-import {
-  AppShell,
-  Title,
-  Header,
-  Group,
-  ActionIcon,
-  Tooltip,
-  useMantineColorScheme,
-} from '@mantine/core';
-import { Sun, MoonStars } from 'tabler-icons-react';
+import { AppShell, useMantineColorScheme } from '@mantine/core';
+import { SideBar } from './SideBar';
+import { Header } from './Header';
+import { Footer } from './Footer';
+
+// import { SideBar } from './SideBar';
 
 type DefaultLayoutProps = { children: ReactNode };
 
 export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const [opened, setOpened] = useState(false);
 
   return (
     <>
@@ -27,22 +25,17 @@ export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
 
       <AppShell
         padding="md"
+        navbarOffsetBreakpoint="sm"
+        navbar={<SideBar opened={opened} />}
         header={
-          <Header height={60} p="xs">
-            <Group position="apart">
-              <Title order={2}>Monitoreo del ruido</Title>
-              <Tooltip
-                position="left"
-                label={colorScheme === 'dark' ? 'Modo claro' : 'Modo oscuro'}
-                withArrow
-              >
-                <ActionIcon onClick={() => toggleColorScheme()}>
-                  {colorScheme === 'dark' ? <Sun /> : <MoonStars />}
-                </ActionIcon>
-              </Tooltip>
-            </Group>
-          </Header>
+          <Header
+            opened={opened}
+            setOpened={setOpened}
+            colorScheme={colorScheme}
+            toggleColorScheme={toggleColorScheme}
+          />
         }
+        footer={<Footer />}
       >
         <main>{children}</main>
       </AppShell>

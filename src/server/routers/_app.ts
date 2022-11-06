@@ -2,7 +2,6 @@
  * This file contains the root router of your tRPC-backend
  */
 import { createRouter } from '../createRouter';
-import { noiseRouter } from './noise';
 import superjson from 'superjson';
 
 /**
@@ -29,10 +28,6 @@ export const appRouter = createRouter()
     async resolve() {
       return 'yay!';
     },
-  })
-  /**
-   * Merge `postRouter` under `post.`
-   */
-  .merge('noise.', noiseRouter);
+  });
 
 export type AppRouter = typeof appRouter;

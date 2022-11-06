@@ -1,0 +1,16 @@
+.logo-uleam {
+  width: 200px;
+  cursor: pointer;
+}
+.subtitle {
+  color: #b2bec3;
+}
+@media (max-width: 640px) {
+  .logo-uleam {
+    display: none;
+  }
+  .title,
+  .subtitle {
+    font-size: 15px;
+  }
+}

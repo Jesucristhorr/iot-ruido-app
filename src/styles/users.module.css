@@ -1,0 +1,24 @@
+.actions-icons {
+  display: flex;
+  align-items: center;
+}
+
+.actions-icons a {
+  margin-right: 24px;
+}
+
+.table-container-users {
+  margin: 24px auto;
+  width: 90%;
+  overflow: scroll;
+}
+
+@media (max-width: 640px) {
+  .table-container-users {
+    width: 100%;
+    padding: 0rem;
+  }
+  .table-container-users Table {
+    width: 80%;
+  }
+}

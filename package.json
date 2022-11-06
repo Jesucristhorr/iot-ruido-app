@@ -3,17 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build:1-generate": "prisma generate",
-    "build:2-migrate": "prisma migrate deploy",
-    "build:3-build": "next build",
+    "build:1-build": "next build",
     "build": "run-s build:*",
     "start": "next start",
-    "dev-db:1-generate": "prisma generate",
-    "dev-db:2-migrate": "prisma migrate dev",
-    "db-seed": "prisma db seed",
     "dev:1-next": "next dev",
-    "dev:2-studio": "prisma studio",
-    "dev": "run-s dev-db:* && run-p dev:*",
+    "dev": "run-p dev:*",
     "next": "next dev",
     "lint": "eslint src",
     "lint-fix": "yarn lint --fix",
@@ -24,9 +18,6 @@
     "test:e2e": "playwright test",
     "ts-node": "ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\""
   },
-  "prisma": {
-    "seed": "ts-node --project tsconfig.seed.json prisma/seed.ts"
-  },
   "prettier": {
     "printWidth": 80,
     "trailingComma": "all",
@@ -35,13 +26,13 @@
   "dependencies": {
     "@mantine/core": "^4.1.3",
     "@mantine/hooks": "^4.1.3",
-    "@prisma/client": "^3.0.1",
     "@react-google-maps/api": "^2.10.0",
     "@trpc/client": "^9.22.0",
     "@trpc/next": "^9.22.0",
     "@trpc/react": "^9.22.0",
     "@trpc/server": "^9.22.0",
     "clsx": "^1.1.1",
+    "formik": "^2.2.9",
     "next": "12.1.4",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
@@ -69,7 +60,6 @@
     "npm-run-all": "^4.1.5",
     "playwright": "^1.19.1",
     "prettier": "^2.5.1",
-    "prisma": "^3.7.0",
     "ts-jest": "^27.0.5",
     "ts-node": "^10.3.0",
     "typescript": "4.4.4"

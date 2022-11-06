@@ -1,0 +1,20 @@
+.actions-icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.table-container {
+  margin: 24px auto;
+  width: 90%;
+  overflow: scroll;
+}
+
+@media (max-width: 640px) {
+  .table-container {
+    width: 100%;
+    padding: 0rem;
+  }
+  .table-container Table {
+    width: 80%;
+  }
+}
